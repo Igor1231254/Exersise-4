@@ -30,40 +30,23 @@ class Xray(Radiant):
     def get_message(self):
         return "Рентгенівське випромінювання"
 
-class Device:
-    def __init__(self):
-        self.handlers = []
+class RadioDevice(Sound, Radio):
+    pass
 
-    def add_handler(self, handler):
-        self.handlers.append(handler)
+class Lamp(Infrared, Visible, Ultraviolet):
+    pass
 
-    def get_messages(self):
-        messages = [handler.get_message() for handler in self.handlers]
-        return messages
+class TNT(Sound, Visible, Infrared, Radio):
+    pass
 
-class RadioDevice(Device):
-    def __init__(self):
-        super().__init__()
-        self.add_handler(Radio())
-        self.add_handler(Sound())
+class Sun(Infrared, Visible, Ultraviolet, Xray, Gamma):
+    pass
 
-class Lamp(Device):
-    def __init__(self):
-        super().__init__()
-        self.add_handler(Visible())
-        self.add_handler(Infrared())
-        self.add_handler(Ultraviolet())
-        
 radio_device = RadioDevice()
 lamp = Lamp()
 
-radio_messages = radio_device.get_messages()
-lamp_messages = lamp.get_messages()
+radio_message = radio_device.get_message()
+lamp_message = lamp.get_message()
 
-print("Повідомлення для класу 'Рація':")
-for message in radio_messages:
-    print(message)
-
-print("\nПовідомлення для класу 'Лампочка':")
-for message in lamp_messages:
-    print(message)
+print(radio_message)
+print(lamp_message)
